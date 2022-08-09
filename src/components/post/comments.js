@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { formatDistance } from 'date-fns';
-import { Link } from 'react-router-dom';
-import AddComment from './add-comment';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { formatDistance } from "date-fns";
+import { Link } from "react-router-dom";
+import AddComment from "./add-comment";
 
-export default function Comments({ docId, comments: allComments, posted, commentInput }) {
+export default function Comments({ comments: allComments, commentInput }) {
   const [comments, setComments] = useState(allComments);
   const [commentsSlice, setCommentsSlice] = useState(3);
 
@@ -29,7 +29,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
             type="button"
             onClick={showNextComments}
             onKeyDown={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 showNextComments();
               }
             }}
@@ -37,12 +37,8 @@ export default function Comments({ docId, comments: allComments, posted, comment
             View more comments
           </button>
         )}
-        <p className="text-gray-base uppercase text-xs mt-2">
-          {formatDistance(posted, new Date())} ago
-        </p>
       </div>
       <AddComment
-        docId={docId}
         comments={comments}
         setComments={setComments}
         commentInput={commentInput}
@@ -52,8 +48,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
 }
 
 Comments.propTypes = {
-  docId: PropTypes.string.isRequired,
   comments: PropTypes.array.isRequired,
   posted: PropTypes.number.isRequired,
-  commentInput: PropTypes.object.isRequired
+  commentInput: PropTypes.object.isRequired,
 };

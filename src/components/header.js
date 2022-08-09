@@ -1,15 +1,10 @@
-import { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import FirebaseContext from '../context/firebase';
-import UserContext from '../context/user';
-import * as ROUTES from '../constants/routes';
-import { DEFAULT_IMAGE_PATH } from '../constants/paths';
-import useUser from '../hooks/use-user';
+import { Link, useHistory } from "react-router-dom";
+import * as ROUTES from "../constants/routes";
+import { DEFAULT_IMAGE_PATH } from "../constants/paths";
+import useUser from "../hooks/use-user";
 
 export default function Header() {
-  const { user: loggedInUser } = useContext(UserContext);
-  const { user } = useUser(loggedInUser?.uid);
-  const { firebase } = useContext(FirebaseContext);
+  const { activerUser: loggedInUser } = useUser();
   const history = useHistory();
 
   return (
@@ -19,7 +14,11 @@ export default function Header() {
           <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">
             <h1 className="flex justify-center w-full">
               <Link to={ROUTES.DASHBOARD} aria-label="Instagram logo">
-                <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12" />
+                <img
+                  src="/images/logo.png"
+                  alt="Instagram"
+                  className="mt-2 w-6/12"
+                />
               </Link>
             </h1>
           </div>
@@ -47,12 +46,10 @@ export default function Header() {
                   type="button"
                   title="Sign Out"
                   onClick={() => {
-                    firebase.auth().signOut();
                     history.push(ROUTES.LOGIN);
                   }}
                   onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      firebase.auth().signOut();
+                    if (event.key === "Enter") {
                       history.push(ROUTES.LOGIN);
                     }
                   }}
@@ -74,11 +71,11 @@ export default function Header() {
                 </button>
                 {user && (
                   <div className="flex items-center cursor-pointer">
-                    <Link to={`/p/${user?.username}`}>
+                    <Link to={`/p/${user?.firstName}`}>
                       <img
                         className="rounded-full h-8 w-8 flex"
-                        src={`/images/avatars/${user?.username}.jpg`}
-                        alt={`${user?.username} profile`}
+                        src={`/images/avatars/${user?.firstName}.jpg`}
+                        alt={`${user?.firstName} profile`}
                         onError={(e) => {
                           e.target.src = DEFAULT_IMAGE_PATH;
                         }}
