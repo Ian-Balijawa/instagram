@@ -25,7 +25,7 @@ export default function Login() {
         console.log(data.user);
 
         localStorage.setItem("user", JSON.stringify(data.user));
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch((error) => {
         setError(error.data);

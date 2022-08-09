@@ -24,7 +24,6 @@ export default function Post({ content }) {
       <Comments
         id={content.id}
         comments={content.comments}
-        posted={content.dateCreated}
         commentInput={commentInput}
       />
     </div>

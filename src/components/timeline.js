@@ -6,7 +6,7 @@ export default function Timeline() {
     {
       id: 1,
       imageSrc: "/images/users/raphael/1.jpg",
-      username: "ianbalijawa",
+      username: "lizardking",
       likes: 1032,
       caption: "Exercitationem odio incidunt dolores Corrupti.",
       userLikedPhoto: true,

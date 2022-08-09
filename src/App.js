@@ -19,13 +19,13 @@ export default function App() {
     <Router>
       <Suspense fallback={<ReactLoader />}>
         <Switch>
-          <Route path={ROUTES.LOGIN} component={Login} />
           <Route path={ROUTES.SIGN_UP} component={SignUp} />
           <Route path={ROUTES.PROFILE} component={Profile} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} />
-          <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
+          <ProtectedRoute user={user} path={ROUTES.DASHBOARD}>
             <Dashboard user={user} setActiveUser={setActiveUser} />
           </ProtectedRoute>
+          <Route path={ROUTES.LOGIN} component={Login} exact />
           <Route component={NotFound} />
         </Switch>
       </Suspense>
